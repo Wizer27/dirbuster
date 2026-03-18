@@ -36,9 +36,11 @@ func main() {
 		}
 
 		if resp.StatusCode != 404 {
-			status_code_str := strconv.Itoa(resp.StatusCode) 
+			status_code_str := strconv.Itoa(resp.StatusCode)
+			fmt.Println("-------------------------------------")
 			fmt.Println("[+] " + test_ur)
 			fmt.Println("[+] Status code " + status_code_str)
+			fmt.Println("-------------------------------------")
 		}
 		defer resp.Body.Close()
 
