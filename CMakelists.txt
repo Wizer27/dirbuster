@@ -6,9 +6,13 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(CLI11 CONFIG REQUIRED)
+find_package(cpr CONFIG REQUIRED)
 
 add_executable(dirbuster
     main.cpp
 )
 
-target_link_libraries(dirbuster PRIVATE CLI11::CLI11)
+target_link_libraries(dirbuster PRIVATE
+    CLI11::CLI11
+    cpr::cpr
+)

@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include <CLI/CLI.hpp>
+#include <cpr/cpr.h>
+#include <fstream>
 
 using namespace std;
 
@@ -17,7 +19,32 @@ int main(int argc,char** argv){
 
     CLI11_PARSE(app, argc, argv);
 
-    std::cout << "URL: " << url << '\n';
-    std::cout << "Wordlist: " << wordlist << '\n';
+    std::ifstream file(wordlist);
+    if(!file.is_open()){
+        std::cout << "File not found" << std::endl;
+        return 0;
+    }
+
+    std::string line;
+    while(std::getline(file,line)){
+        string url_to_test = url + line;
+        auto response = cpr::Get(
+            cpr::Url{url_to_test}
+        );
+        if(response.status_code != 404){
+            std::cout << "===============" << std::endl;
+            std::cout << "      URL     " << std::endl;
+            std::cout << url_to_test << std::endl;
+            std::cout << "   STATUS CODE  " << std::endl;
+            std::cout << response.status_code << std::endl;
+            std::cout << "===============" << std::endl;
+        }
+
+    };
+
+
+    file.close();
+
+
     return 0;
 }
