@@ -8,6 +8,22 @@
 using namespace std;
 
 
+void port_scaner(string& url){
+    for(int i = 0;i <= 65535;i++){
+        string port = std::to_string(i);
+        string new_url = url + ":" + port;
+        auto response = cpr::Get(
+            cpr::Url{new_url}
+        );
+
+        if(response.status_code != 404){
+            std::cout << "PORT" << std::endl;
+            std::cout << i << std::endl;
+        }
+    }
+}
+
+
 int main(int argc,char** argv){
     CLI::App app{"Dirbuster"};
     std::string wordlist;
