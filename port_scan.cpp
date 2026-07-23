@@ -3,7 +3,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string>
-
+#include <CLI/CLI.hpp>
 
 using namespace std;
 
@@ -46,6 +46,33 @@ bool is_port_open(const string& ip,int port){
     return ok;
 }
 
-int main(){
+int main(int argc,char** argv){
+    CLI::App app("port_scan");
+    std::string domain;
+
+    app.add_option("-d,--domain",domain,"Domain to scan.") -> required();
+
+    CLI11_PARSE(app,argc,argv);
+
+
+    string& domain_link = domain;
+
+    string domain_ip = get_ip(domain_link);
+
+    string& ip_link = domain_ip;
+    
+    const int port_amount = 65700;
+
+    for(int i  = 0;i <= port_amount;i++){
+
+        bool result_scan = is_port_open(ip_link,i);
+        if(resuly_scan){
+            std::cout << "PORT" << std::endl;
+            std::cout << i << std::endl;
+        }
+    }
+
+    std::cout << "Scanned " + port_amount.to_string() + " ports" << std::endl;
     return 0;
+
 }
