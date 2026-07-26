@@ -50,3 +50,5 @@ func main() {
 		log.Fatal(err)
 	}
 }
+
+// better use the C++ or python version
