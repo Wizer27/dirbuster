@@ -37,10 +37,8 @@ int main(int argc,char** argv){
         );
         if(response.status_code != 404){
             std::cout << "===============" << std::endl;
-            std::cout << "      URL     " << std::endl;
-            std::cout << url_to_test << std::endl;
-            std::cout << "   STATUS CODE  " << std::endl;
-            std::cout << response.status_code << std::endl;
+            std::cout << "[+] URL: " <<  url_to_test << std::endl;
+            std::cout << "[+] STATUS CODE: " << response.status_code << std::endl;
             std::cout << "===============" << std::endl;
         }
 
