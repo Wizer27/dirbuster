@@ -35,3 +35,13 @@ else:
 
         except Exception as e:
             print(f"Error : {e}")
+
+
+def ffuf_style():
+    if not args.file or not args.url:
+        raise KeyError("Wrong argument")
+    
+    with open(args.file,"r") as file:
+        data = file.read()
+    
+    
