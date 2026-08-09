@@ -10,6 +10,23 @@ parser.add_argument("-c","--codes",type = list,help = "allowed codes")
 
 args = parser.parse_args()
 
+
+
+VERSION = "v1.0.0"
+
+BANNER = r"""
+    __    __  ___  __ ________  ____________
+/ /   / / / / |/ // ____/ / / /__  /__  /
+/ /   / / / /|   // /_  / / / /  / /  / /
+/ /___/ /_/ //   |/ __/ / /_/ /  / /__/ /__
+/_____/\____//_/|_/_/    \____/  /____/____/  {version}
+"""
+
+
+def banner() -> None:
+    print(BANNER.format(version=VERSION))
+
+
     
 def old_version():
     if not args.file or not args.url:
@@ -65,5 +82,6 @@ def ffuf_style():
                 print(f"[+] ERROR : {e}")
 
 if __name__ == "__main__":
+    banner()
     ffuf_style()
 
