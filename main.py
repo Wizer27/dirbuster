@@ -78,8 +78,10 @@ def ffuf_style():
                         if args.json:
                             print(f"JSON : {resp.json()}")
 
-            except Exception as e:
-                print(f"[+] ERROR : {e}")
+            except KeyboardInterrupt:
+                print("\n")
+                print("quitting...".upper())
+                return
 
 if __name__ == "__main__":
     banner()
