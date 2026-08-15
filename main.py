@@ -77,7 +77,8 @@ def ffuf_style():
                         print(f"[+] Status_code: {resp.status_code}")
                         if args.json:
                             print(f"JSON : {resp.json()}")
-
+            except requests.RequestException:
+                continue
             except KeyboardInterrupt:
                 print("\n")
                 print("quitting...".upper())
