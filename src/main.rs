@@ -2,15 +2,10 @@ use std::io::{BufReader,BufRead};
 use std::fs::File;
 
 
-async fn send_request(url:&str) -> Result<(),reqwest::Error>{
+async fn send_request(url:&str) -> Result<reqwest::Response, reqwest::Error>{
     let response = reqwest::get(url)
         .await?;
-
-    let text = response.text().await?;
-
-    println!("{}", text);
-
-    Ok(())
+    Ok(response)
 }
 
 
@@ -23,8 +18,13 @@ async fn main(){
     for line in reader.lines() {
         let line = line.expect("Cannot read line");
         let new_url = format!("{}{}", url, line);
-        let response = send_request(&new_url).await;
-        println!("[+]Respone: {:?}",response);
+        let response = send_request(&new_url).await.unwrap();
+        let status = response.status();
+        let status_code:u16 = status.as_u16();
+        if status_code != 404 && status_code != 403{
+            println!("[+] URL: {}",new_url);
+            println!("[+] STATUS CODE: {}",status_code);
+        }
 
     }
 }
